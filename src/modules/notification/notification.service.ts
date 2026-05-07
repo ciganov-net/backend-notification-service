@@ -1,4 +1,4 @@
-import { OtpRequestedEvent } from '@ciganov/contracts'
+import { EmailChangedEvent, OtpRequestedEvent } from '@ciganov/contracts'
 import { Injectable } from '@nestjs/common'
 
 import { MailService } from '@/infrastructure/mail/mail.service'
@@ -10,5 +10,9 @@ export class NotificationService {
 	public async sendOtp(data: OtpRequestedEvent) {
 		const { identifier, code } = data
 		await this.mailService.sendOtp(identifier, code)
+	}
+	public async sendEmailChanged(data: EmailChangedEvent) {
+		const { code, email } = data
+		return await this.mailService.sendEmailChange(email, code)
 	}
 }

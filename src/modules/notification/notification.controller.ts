@@ -1,4 +1,4 @@
-import type { OtpRequestedEvent } from '@ciganov/contracts'
+import type { EmailChangedEvent, OtpRequestedEvent } from '@ciganov/contracts'
 import { Controller } from '@nestjs/common'
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices'
 import { InjectMetric } from '@willsoto/nestjs-prometheus'
@@ -53,6 +53,42 @@ export class NotificationController {
 				status: 'error'
 			})
 			this.rabbitmqService.nack(ctx)
+			throw error
+		} finally {
+			endTimer()
+		}
+	}
+
+	@EventPattern('account.email.change')
+	public async emailChanged(
+		@Payload() data: EmailChangedEvent,
+		@Ctx() ctx: RmqContext
+	) {
+		const event = 'account.email.change'
+
+		const endTimer = this.processingDuration.startTimer({
+			service: this.SERVICE_NAME,
+			event
+		})
+		try {
+			await this.notificationService.sendEmailChanged(data)
+			this.eventTotal.inc({
+				service: this.SERVICE_NAME,
+				event,
+				status: 'success'
+			})
+			this.rabbitmqService.ack(ctx, event)
+		} catch (error) {
+			this.logger.error(
+				//@ts-ignore
+				`Email change processing error: ${error?.message ?? error}`
+			)
+			this.eventTotal.inc({
+				service: this.SERVICE_NAME,
+				event,
+				status: 'error'
+			})
+			this.rabbitmqService.nack(ctx, event)
 			throw error
 		} finally {
 			endTimer()
