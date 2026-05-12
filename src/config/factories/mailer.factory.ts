@@ -10,7 +10,8 @@ export function mailerFactory(configService: ConfigService): MailerOptions {
 				user: configService.getOrThrow<string>('SMTP_USERNAME'),
 				pass: configService.getOrThrow<string>('SMTP_PASSWORD')
 			},
-			secure: true
+			secure: true,
+			name: 'ciganov.net'
 		},
 		defaults: {
 			from: configService.getOrThrow<string>('SMTP_FROM_ADDRESS')
