@@ -1,33 +1,102 @@
-<html lang='en'>
+<html lang='ru'>
 	<head>
 		<meta charset='UTF-8' />
 		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
-		<title>Подтверждение смены почты</title>
+		<title>Ваш код подтверждения</title>
 	</head>
-	<body style='margin: 0; padding: 0; font-family: Arial, sans-serif'>
-		<table style='width: 100%;' cellpadding='0' cellspacing='0'>
+
+	<body
+		style='margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #08080b;'
+	>
+		<table
+			width='100%'
+			cellpadding='0'
+			cellspacing='0'
+			border='0'
+			style='width: 100%; min-width: 320px; background: radial-gradient(80.86% 404.98% at 73.72% 421.08%, #FFCE43 0%, #08080B 100%); background-color: #08080b;'
+		>
 			<tr>
-				<td align='center' style='padding: 40px;'>
-					{{! <table style='width: 100%;'></table> }}
-					<h1 style='font-size: 22px; font-weight: bold; margin: 0 0 25px;'>
-						Код подтверждения для смены почты
-					</h1>
-					<p style='font-size: 15px; margin: 0 0 15px;'>Ваш код: </p>
-					<div
-						style='font-size: 36px; font-weight: bold; letter-spacing: 6px; margin: 18px 0'
+				<td align='center' style='padding: 128px 24px;'>
+					<table
+						width='392'
+						cellpadding='0'
+						cellspacing='0'
+						border='0'
+						style='width: 100%; max-width: 392px; background: rgba(17, 19, 24, 0.92); border-radius: 32px;'
 					>
-						{{code}}
-					</div>
-					<p style='font-size:13px; color:#555; margin: 30px 0 0'>
-						Если это были не вы - просто игнорируйте письмо.
-					</p>
-					<p style='font-size:13px; margin:8px 0 0 0;'>
-						<a
-							href='scvrylullaby.ru'
-							target='_blank'
-							style='text-decoration: none; color:#000;font-weight: bold;'
-						>scvrylullaby.ru</a>
-					</p>
+						<tr>
+							<td align='center' style='padding: 32px;'>
+								<h1
+									style='margin: 0 0 24px 0; font-family: Arial, sans-serif; font-size: 22px; line-height: 34px; font-weight: 700; text-align: center; color: #ffffff;'
+								>
+									Код подтверждения
+								</h1>
+
+								<img
+									src='{{codeImageSrc}}'
+									alt='Код подтверждения {{code}}'
+									width='320'
+									height='320'
+									style='display: block; width: 320px; max-width: 100%; height: auto; margin: 0 auto 24px auto; border: 0; outline: none; text-decoration: none; border-radius: 24px;'
+								/>
+
+								<table
+									width='328'
+									cellpadding='0'
+									cellspacing='0'
+									border='0'
+									style='width: 100%; max-width: 328px; margin: 0 auto 16px auto;'
+								>
+									<tr>
+										{{#each digits}}
+											<td
+												align='center'
+												valign='middle'
+												style='width: 48px; height: 48px; padding: 0 4px;'
+											>
+												<table
+													width='48'
+													height='48'
+													cellpadding='0'
+													cellspacing='0'
+													border='0'
+													style='width: 48px; height: 48px; border: 1px solid #FFCE43; border-radius: 12px;'
+												>
+													<tr>
+														<td
+															align='center'
+															valign='middle'
+															style='width: 48px; height: 48px; font-family: Arial, sans-serif; font-size: 24px; line-height: 48px; font-weight: 700; text-align: center; color: #ffffff;'
+														>
+															{{this}}
+														</td>
+													</tr>
+												</table>
+											</td>
+										{{/each}}
+									</tr>
+								</table>
+
+								<p
+									style='margin: 0 0 16px 0; font-family: Arial, sans-serif; font-size: 13px; line-height: 20px; font-weight: 400; text-align: center; color: #8A919C;'
+								>
+									Если это были не вы — просто игнорируйте письмо
+								</p>
+
+								<p
+									style='margin: 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px; font-weight: 400; text-align: center;'
+								>
+									<a
+										href='https://ciganov.net'
+										target='_blank'
+										style='color: #ffffff; text-decoration: none;'
+									>
+										ciganov.net
+									</a>
+								</p>
+							</td>
+						</tr>
+					</table>
 				</td>
 			</tr>
 		</table>
