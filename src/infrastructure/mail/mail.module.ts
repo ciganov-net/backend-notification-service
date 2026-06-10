@@ -5,10 +5,11 @@ import { ConfigService } from '@nestjs/config'
 import { mailerFactory } from '@/config'
 
 import { MailService } from './mail.service'
+import { OtpImageService } from './otp-image.service'
 import { TemplateService } from './template.service'
 
 @Module({
-	providers: [MailService, TemplateService],
+	providers: [MailService, TemplateService, OtpImageService],
 	imports: [
 		MailerModule.forRootAsync({
 			useFactory: mailerFactory,
